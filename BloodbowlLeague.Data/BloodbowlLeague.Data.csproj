@@ -53,15 +53,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LiteDbModule.cs" />
-    <Compile Include="PlayerStorage.cs" />
-    <Compile Include="PlayerTypeStorage.cs" />
-    <Compile Include="RaceRepository.cs" />
-    <Compile Include="RaceStorage.cs" />
-    <Compile Include="SkillStorage.cs" />
-    <Compile Include="PlayerStatStorage.cs" />
-    <Compile Include="TeamRepository.cs" />
+    <Compile Include="Team\PlayerStorage.cs" />
+    <Compile Include="Race\PlayerTypeStorage.cs" />
+    <Compile Include="Race\RaceRepository.cs" />
+    <Compile Include="Race\RaceStorage.cs" />
+    <Compile Include="Skill\SkillRepository.cs" />
+    <Compile Include="Skill\SkillStorage.cs" />
+    <Compile Include="Values\PlayerStatStorage.cs" />
+    <Compile Include="Team\TeamRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TeamStorage.cs" />
+    <Compile Include="Team\TeamStorage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

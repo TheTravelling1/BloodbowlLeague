@@ -9,17 +9,17 @@ using Shouldly;
 namespace BloodbowlLeague.Data.IntegrationTests
 {
     [TestFixture]
-    public class RaceRepositoryTests
+    public class SkillRepositoryTests
     {
         private static readonly string TempFilePath = Path.Combine( Path.GetTempPath(), Guid.NewGuid() + ".tmp" );
 
-        private IRaceRepository _raceRepository;
+        private ISkillRepository _skillRepository;
         private readonly StandardKernel _container = new StandardKernel( new LiteDbModule( TempFilePath ) );
 
         [SetUp]
         public void SetUp()
         {
-            _raceRepository = _container.Get<IRaceRepository>();
+            _skillRepository = _container.Get<ISkillRepository>();
         }
 
         [TearDown]
@@ -40,60 +40,45 @@ namespace BloodbowlLeague.Data.IntegrationTests
         [Test]
         public void When_saving_a_race__Then_it_should_be_persisted()
         {
-            var toSave = new Race( "High Elf" );
+            var toSave = new Skill( "Block", "Blocks Something" );
 
-            _raceRepository.Save( toSave );
+            _skillRepository.Save( toSave );
 
-            RaceStorage fromDb;
+            SkillStorage fromDb;
             using ( var db = new LiteDatabase( TempFilePath ) )
             {
-                var col = db.GetCollection<RaceStorage>( "races" );
+                var col = db.GetCollection<SkillStorage>( "skills" );
 
-                fromDb = col.FindOne( t => t.Name == "High Elf" );
+                fromDb = col.FindOne( t => t.Name == "Block" );
             }
 
-            fromDb.Name.ShouldBe( "High Elf" );
-        }
-
-        [Test]
-        public void Given_a_previously_saved_race__When_retrieving_it__Then_it_is_retrieved_correctly()
-        {
-            var toSave = CreateRace("High Elf");
-
-            using ( var db = new LiteDatabase( TempFilePath ) )
-            {
-                var col = db.GetCollection<RaceStorage>( "races" );
-                col.Insert(toSave);
-            }
-
-            var fromDb = _raceRepository.Get( "High Elf");
-            fromDb.Name.ShouldBe( "High Elf" );
+            fromDb.Name.ShouldBe( "Block" );
+            fromDb.Description.ShouldBe( "Blocks Something" );
         }
 
         [Test]
         public void Given_previously_saved_raced__When_retrieving_them__Then_all_are_retrieved()
         {
-            var highElf = CreateRace("High Elf");
-            var orc = CreateRace( "Orc");
+            var block = new SkillStorage { Name = "Block", Description = "Blocks Something" };
+            var safethrow = new SkillStorage { Name = "Safe Throw", Description = "Throws Something" };
 
             using ( var db = new LiteDatabase( TempFilePath ) )
             {
-                var col = db.GetCollection<RaceStorage>( "races" );
-                col.Insert(highElf);
-                col.Insert(orc);
+                var col = db.GetCollection<SkillStorage>( "skills" );
+                col.Insert( block );
+                col.Insert( safethrow );
             }
 
-            var fromDb = _raceRepository.GetAll();
+            var fromDb = _skillRepository.GetAll();
 
-            fromDb.Count.ShouldBe(2);
-            fromDb.ShouldContain(r => r.Name == "High Elf");
-            fromDb.ShouldContain(r => r.Name == "Orc");
+            fromDb.Count.ShouldBe( 2 );
+            fromDb.ShouldContain( r => r.Name == "Block" && r.Description == "Blocks Something" );
+            fromDb.ShouldContain( r => r.Name == "Safe Throw" && r.Description == "Throws Something" );
         }
 
-        private static RaceStorage CreateRace(string name)
+        private static RaceStorage CreateRace( string name )
         {
-            var toSave = new RaceStorage
-            {
+            var toSave = new RaceStorage {
                 Name = name,
                 PlayerTypes = new[]
                 {

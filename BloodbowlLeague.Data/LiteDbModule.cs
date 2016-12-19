@@ -1,8 +1,6 @@
 ﻿using System.Linq;
 using AutoMapper;
-using BloodbowlLeague.Logic.Race;
-using BloodbowlLeague.Logic.Team;
-using BloodbowlLeague.Logic.Values;
+using BloodbowlLeague.Logic;
 using Ninject.Modules;
 
 namespace BloodbowlLeague.Data
@@ -43,6 +41,10 @@ namespace BloodbowlLeague.Data
 
             Bind<IRaceRepository>()
                 .ToConstant( new RaceRepository( _filePath ) )
+                .InSingletonScope();
+
+            Bind<ISkillRepository>()
+                .ToConstant( new SkillRepository( _filePath ) )
                 .InSingletonScope();
         }
     }

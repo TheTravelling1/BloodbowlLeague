@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace BloodbowlLeague.Logic.Race
+namespace BloodbowlLeague.Logic
 {
     public interface IRaceRepository
     {

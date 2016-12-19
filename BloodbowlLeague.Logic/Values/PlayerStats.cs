@@ -1,4 +1,4 @@
-namespace BloodbowlLeague.Logic.Values
+namespace BloodbowlLeague.Logic
 {
     public class PlayerStats
     {

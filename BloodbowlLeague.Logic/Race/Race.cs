@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using BloodbowlLeague.Logic.Values;
 
-namespace BloodbowlLeague.Logic.Race
+namespace BloodbowlLeague.Logic
 {
     public class Race
     {

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using BloodbowlLeague.Logic.Race;
-using BloodbowlLeague.Logic.Team;
-using BloodbowlLeague.Logic.Values;
+using BloodbowlLeague.Logic;
 using LiteDB;
 using Ninject;
 using NUnit.Framework;

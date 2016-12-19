@@ -1,4 +1,4 @@
-﻿namespace BloodbowlLeague.Logic.Team
+﻿namespace BloodbowlLeague.Logic
 {
     public interface ITeamRepository
     {

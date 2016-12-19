@@ -1,0 +1,28 @@
+﻿@model IEnumerable<BloodbowlLeague.Logic.Skill>
+
+@{
+    ViewBag.Title = "Skills";
+    Layout = "~/Views/Layouts/_Main.cshtml";
+}
+
+<h1>Skills</h1>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    @foreach (var skill in Model)
+    {
+        <tr>
+            <td>@skill.Name</td>
+            <td>@skill.Description</td>
+        </tr>
+    }
+    </tbody>
+</table>
+@Html.ActionLink("Add New Skill", "Add")

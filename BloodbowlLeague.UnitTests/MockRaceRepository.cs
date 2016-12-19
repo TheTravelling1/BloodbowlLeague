@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
-using BloodbowlLeague.Logic.Race;
-using BloodbowlLeague.Logic.Values;
+using BloodbowlLeague.Logic;
 
 namespace BloodbowlLeague.UnitTests
 {

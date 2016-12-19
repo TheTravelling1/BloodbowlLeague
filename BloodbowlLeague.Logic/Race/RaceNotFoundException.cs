@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace BloodbowlLeague.Logic.Race
+namespace BloodbowlLeague.Logic
 {
     [Serializable]
     public class RaceNotFoundException : Exception
