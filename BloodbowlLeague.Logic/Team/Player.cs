@@ -13,11 +13,11 @@ namespace BloodbowlLeague.Logic.Team
 
         public PlayerStats BaseStats { get; }
 
-        public IReadOnlyCollection<Skill> BaseSkills { get; }
+        public IReadOnlyCollection<string> BaseSkills { get; }
 
         public PlayerStats Stats { get; }
 
-        public IReadOnlyCollection<Skill> Skills { get; }
+        public IReadOnlyCollection<string> Skills { get; }
 
         public Player( string name, PlayerType type )
         {
@@ -25,13 +25,13 @@ namespace BloodbowlLeague.Logic.Team
             Type = type.Name;
 
             BaseStats = type.BaseStats.Clone();
-            BaseSkills = new List<Skill>( type.BaseSkills );
+            BaseSkills = new List<string>( type.BaseSkills );
 
             Stats = type.BaseStats.Clone();
-            Skills = new List<Skill>( type.BaseSkills );
+            Skills = new List<string>( type.BaseSkills );
         }
 
-        public Player( string name, string type, PlayerStats baseStats, IEnumerable<Skill> baseSkills, PlayerStats currentStats, IEnumerable<Skill> currentSkills )
+        public Player( string name, string type, PlayerStats baseStats, IEnumerable<string> baseSkills, PlayerStats stats, IEnumerable<string> skills )
         {
             Name = name;
             Type = type;
@@ -39,8 +39,8 @@ namespace BloodbowlLeague.Logic.Team
             BaseStats = baseStats;
             BaseSkills = baseSkills.ToList();
 
-            Stats = currentStats;
-            Skills = currentSkills.ToList();
+            Stats = stats;
+            Skills = skills.ToList();
         }
     }
 }

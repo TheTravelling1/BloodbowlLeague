@@ -22,7 +22,7 @@ namespace BloodbowlLeague.UnitTests
         public void When_adding_a_player_to_a_team__Then_is_it_created_correctly()
         {
             var team = new Team( "High and Mighty", "High Elf" );
-            var highElf = new MockRaceRepository().GetRace( "High Elf" );
+            var highElf = new MockRaceRepository().Get( "High Elf" );
 
             var blitzer = highElf.PlayerTypes.Single( pt => pt.Name == "Blitzer" );
             team.AddPlayer( blitzer, "Verwarthil Undomiel" );
@@ -40,7 +40,7 @@ namespace BloodbowlLeague.UnitTests
         public void Given_a_playerType_of_a_different_race_When_adding_a_player_to_a_team__Then_an_exception_is_thrown()
         {
             var team = new Team( "The Terminal Show", "Human" );
-            var highElf = new MockRaceRepository().GetRace( "High Elf" );
+            var highElf = new MockRaceRepository().Get( "High Elf" );
             
             Should.Throw<IncorrectRaceException>( () => team.AddPlayer( highElf.PlayerTypes.Single( pt => pt.Name == "Blitzer" ), "Verwarthil Undomiel" ) );
         }

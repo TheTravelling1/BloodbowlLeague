@@ -6,22 +6,22 @@ namespace BloodbowlLeague.Logic.Race
 {
     public class PlayerType
     {
-        private readonly List<Skill> _baseSkills;
+        private readonly List<string> _baseSkills;
 
         public string Name { get; }
 
-        public Race Race { get; }
+        public string Race { get; }
 
         public PlayerStats BaseStats { get; }
 
-        public IReadOnlyCollection<Skill> BaseSkills => _baseSkills.AsReadOnly();
+        public IReadOnlyCollection<string> BaseSkills => _baseSkills.AsReadOnly();
 
-        public PlayerType( string name, Race race, PlayerStats baseStats, IEnumerable<Skill> skills )
+        public PlayerType( string name, string race, PlayerStats baseStats, IEnumerable<string> baseSkills )
         {
             Name = name;
             Race = race;
             BaseStats = baseStats;
-            _baseSkills = skills.ToList();
+            _baseSkills = baseSkills.ToList();
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using BloodbowlLeague.Logic;
 using BloodbowlLeague.Logic.Race;
 using BloodbowlLeague.Logic.Values;
 using NUnit.Framework;
@@ -23,8 +22,8 @@ namespace BloodbowlLeague.UnitTests
             highElf.PlayerTypes.ShouldHaveSingleItem();
             highElf.PlayerTypes.Single().Name.ShouldBe( "Blitzer" );
             highElf.PlayerTypes.Single().BaseStats.ShouldBeSameAs( playerStats );
-            highElf.PlayerTypes.Single().BaseSkills.ShouldBe( new[] { block } );
-            highElf.PlayerTypes.Single().Race.ShouldBe( highElf );
+            highElf.PlayerTypes.Single().BaseSkills.ShouldBe( new[] { "Block" } );
+            highElf.PlayerTypes.Single().Race.ShouldBe( "High Elf" );
         }
     }
 }

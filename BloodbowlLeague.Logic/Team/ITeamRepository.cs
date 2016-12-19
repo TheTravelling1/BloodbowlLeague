@@ -2,7 +2,7 @@
 {
     public interface ITeamRepository
     {
-        void SaveTeam( Team toSave );
+        void Save( Team toSave );
         Team Get(string teamName);
     }
 }

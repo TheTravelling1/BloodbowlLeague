@@ -1,6 +1,6 @@
 ﻿namespace BloodbowlLeague.Data
 {
-    public class StatStorage
+    public class PlayerStatStorage
     {
         public byte MovementAllowance { get; set; }
         public byte Strength { get; set; }
