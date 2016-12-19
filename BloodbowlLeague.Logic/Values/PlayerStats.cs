@@ -2,15 +2,15 @@ namespace BloodbowlLeague.Logic.Values
 {
     public class PlayerStats
     {
-        public int MovementAllowance { get; }
+        public byte MovementAllowance { get; }
 
-        public int Strength { get; }
+        public byte Strength { get; }
 
-        public int Agility { get; }
+        public byte Agility { get; }
 
-        public int ArmourValue { get; }
+        public byte ArmourValue { get; }
 
-        public PlayerStats( int movementAllowance, int strength, int agility, int armourValue )
+        public PlayerStats( byte movementAllowance, byte strength, byte agility, byte armourValue )
         {
             MovementAllowance = movementAllowance;
             Strength = strength;
@@ -40,10 +40,10 @@ namespace BloodbowlLeague.Logic.Values
         {
             unchecked
             {
-                var hashCode = MovementAllowance;
-                hashCode = (hashCode*397) ^ Strength;
-                hashCode = (hashCode*397) ^ Agility;
-                hashCode = (hashCode*397) ^ ArmourValue;
+                var hashCode = MovementAllowance.GetHashCode();
+                hashCode = (hashCode*397) ^ Strength.GetHashCode();
+                hashCode = (hashCode*397) ^ Agility.GetHashCode();
+                hashCode = (hashCode*397) ^ ArmourValue.GetHashCode();
                 return hashCode;
             }
         }

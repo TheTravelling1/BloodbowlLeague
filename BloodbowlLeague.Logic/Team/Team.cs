@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using BloodbowlLeague.Logic.Race;
 
 namespace BloodbowlLeague.Logic.Team
@@ -18,6 +19,12 @@ namespace BloodbowlLeague.Logic.Team
             Name = name;
             Race = race;
             _players = new List<Player>();
+        }
+
+        public Team( string name, string race, IEnumerable<Player> players )
+            : this( name, race )
+        {
+            _players = players.ToList();
         }
 
         public void AddPlayer( PlayerType type, string name )

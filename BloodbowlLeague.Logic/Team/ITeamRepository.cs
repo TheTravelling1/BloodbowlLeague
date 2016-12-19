@@ -3,5 +3,6 @@
     public interface ITeamRepository
     {
         void SaveTeam( Team toSave );
+        Team Get(string teamName);
     }
 }

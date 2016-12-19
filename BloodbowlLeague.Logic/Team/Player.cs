@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using BloodbowlLeague.Logic.Race;
 using BloodbowlLeague.Logic.Values;
 
@@ -28,6 +29,18 @@ namespace BloodbowlLeague.Logic.Team
 
             Stats = type.BaseStats.Clone();
             Skills = new List<Skill>( type.BaseSkills );
+        }
+
+        public Player( string name, string type, PlayerStats baseStats, IEnumerable<Skill> baseSkills, PlayerStats currentStats, IEnumerable<Skill> currentSkills )
+        {
+            Name = name;
+            Type = type;
+
+            BaseStats = baseStats;
+            BaseSkills = baseSkills.ToList();
+
+            Stats = currentStats;
+            Skills = currentSkills.ToList();
         }
     }
 }
