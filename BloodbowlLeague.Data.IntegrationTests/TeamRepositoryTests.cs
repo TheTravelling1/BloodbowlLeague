@@ -1,6 +1,9 @@
 ﻿using System;
 using System.IO;
-using BloodbowlLeague.Logic;
+using System.Linq;
+using BloodbowlLeague.Logic.Race;
+using BloodbowlLeague.Logic.Team;
+using BloodbowlLeague.Logic.Values;
 using LiteDB;
 using Ninject;
 using NUnit.Framework;
@@ -38,18 +41,132 @@ namespace BloodbowlLeague.Data.IntegrationTests
         }
 
         [Test]
-        public void When_saving_a_team_Then_its_name_should_be_persisted()
+        public void When_saving_a_team__Then_it_should_be_persisted()
         {
-            var toSave = new Team( "High and Mighty" );
+            var toSave = new Team( "High and Mighty", "High Elf" );
+            var playerType = new PlayerType( "Blitzer", new Race( "High Elf" ), new PlayerStats( 1, 2, 3, 4 ), new[] { new Skill( "Block", "Blocks" ) } );
+            toSave.AddPlayer( playerType, "Mikul Maviv" );
 
             _teamRepository.SaveTeam( toSave );
 
+            TeamStorage fromDb;
             using ( var db = new LiteDatabase( TempFilePath ) )
             {
                 var col = db.GetCollection<TeamStorage>( "teams" );
 
-                col.Exists( t => t.Name == "High and Mighty" ).ShouldBeTrue();
+                fromDb = col.FindOne( t => t.Name == "High and Mighty" );
             }
+
+            AssertThatTeamStorageMatchesTeam( fromDb, toSave );
+        }
+
+        [Test]
+        public void Given_a_previously_saved_team_with_players__When_retrieving_it__Then_it_should_retrieve_successfully()
+        {
+            var toSave = CreatePlayerStorage();
+            SavePlayerStorage( toSave );
+
+            var fromDb = _teamRepository.Get( "High and Mighty" );
+
+            AssertThatTeamMatchesTeamStorage( fromDb, toSave );
+        }
+
+        private void AssertThatTeamStorageMatchesTeam( TeamStorage fromDb, Team toSave )
+        {
+            fromDb.Name.ShouldBe( toSave.Name );
+            fromDb.Race.ShouldBe( toSave.Race );
+            fromDb.Players.Length.ShouldBe( toSave.Players.Count );
+
+            foreach ( var playerToCheck in toSave.Players )
+            {
+                var player = fromDb.Players.SingleOrDefault( p => p.Name == playerToCheck.Name );
+
+                player.ShouldNotBeNull( "The team in the database did not contain a player with name " + playerToCheck.Name );
+                player.Type.ShouldBe( playerToCheck.Type );
+
+                player.BaseStats.MovementAllowance.ShouldBe( playerToCheck.BaseStats.MovementAllowance );
+                player.BaseStats.Strength.ShouldBe( playerToCheck.BaseStats.Strength );
+                player.BaseStats.Agility.ShouldBe( playerToCheck.BaseStats.Agility );
+                player.BaseStats.ArmourValue.ShouldBe( playerToCheck.BaseStats.ArmourValue );
+
+                player.BaseSkills.Length.ShouldBe( playerToCheck.BaseSkills.Count );
+                foreach ( var baseSkill in playerToCheck.BaseSkills )
+                {
+                    player.BaseSkills.ShouldContain( s => s.Name == baseSkill.Name && s.Description == baseSkill.Description );
+                }
+
+                player.Stats.MovementAllowance.ShouldBe( playerToCheck.Stats.MovementAllowance );
+                player.Stats.Strength.ShouldBe( playerToCheck.Stats.Strength );
+                player.Stats.Agility.ShouldBe( playerToCheck.Stats.Agility );
+                player.Stats.ArmourValue.ShouldBe( playerToCheck.Stats.ArmourValue );
+
+                player.Skills.Length.ShouldBe( playerToCheck.Skills.Count );
+                foreach ( var skill in playerToCheck.Skills )
+                {
+                    player.Skills.ShouldContain( s => s.Name == skill.Name && s.Description == skill.Description );
+                }
+            }
+        }
+
+        private static void AssertThatTeamMatchesTeamStorage( Team fromDb, TeamStorage toSave )
+        {
+            fromDb.Name.ShouldBe( toSave.Name );
+            fromDb.Race.ShouldBe( toSave.Race );
+            fromDb.Players.Count.ShouldBe( toSave.Players.Length );
+            foreach ( var playerToCheck in toSave.Players )
+            {
+                var player = fromDb.Players.SingleOrDefault( p => p.Name == playerToCheck.Name );
+
+                player.ShouldNotBeNull( "The team in the database did not contain a player with name " + playerToCheck.Name );
+                player.Type.ShouldBe( playerToCheck.Type );
+
+                player.BaseStats.MovementAllowance.ShouldBe( playerToCheck.BaseStats.MovementAllowance );
+                player.BaseStats.Strength.ShouldBe( playerToCheck.BaseStats.Strength );
+                player.BaseStats.Agility.ShouldBe( playerToCheck.BaseStats.Agility );
+                player.BaseStats.ArmourValue.ShouldBe( playerToCheck.BaseStats.ArmourValue );
+                player.BaseSkills.ShouldBe( playerToCheck.BaseSkills.Select( s => new Skill( s.Name, s.Description ) ) );
+
+                player.Stats.MovementAllowance.ShouldBe( playerToCheck.Stats.MovementAllowance );
+                player.Stats.Strength.ShouldBe( playerToCheck.Stats.Strength );
+                player.Stats.Agility.ShouldBe( playerToCheck.Stats.Agility );
+                player.Stats.ArmourValue.ShouldBe( playerToCheck.Stats.ArmourValue );
+                player.Skills.ShouldBe( playerToCheck.Skills.Select( s => new Skill( s.Name, s.Description ) ) );
+            }
+        }
+
+        private static void SavePlayerStorage( TeamStorage toSave )
+        {
+            using ( var db = new LiteDatabase( TempFilePath ) )
+            {
+                var col = db.GetCollection<TeamStorage>( "teams" );
+
+                col.Insert( toSave );
+            }
+        }
+
+        private static TeamStorage CreatePlayerStorage()
+        {
+            return new TeamStorage {
+                Id = 1,
+                Name = "High and Mighty",
+                Players = new[]
+                {
+                    new PlayerStorage
+                    {
+                        Name = "Mikul Maviv",
+                        Type = "Blitzer",
+                        BaseStats = new StatStorage {MovementAllowance = 1, Strength = 2, Agility = 3, ArmourValue = 4},
+                        BaseSkills = new[] {new SkillStorage {Name = "Block", Description = "Blocks"}},
+                        Stats = new StatStorage {MovementAllowance = 9, Strength = 8, Agility = 7, ArmourValue = 6},
+                        Skills =
+                            new[]
+                            {
+                                new SkillStorage {Name = "Block", Description = "Blocks"},
+                                new SkillStorage {Name = "Safe Throw", Description = "Throws"}
+                            }
+                    }
+                }
+            };
         }
     }
 }

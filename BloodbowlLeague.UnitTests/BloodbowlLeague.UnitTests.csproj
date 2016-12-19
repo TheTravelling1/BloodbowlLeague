@@ -48,8 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="RosterTests.cs" />
+    <Compile Include="MockRaceRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RaceTests.cs" />
+    <Compile Include="TeamTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

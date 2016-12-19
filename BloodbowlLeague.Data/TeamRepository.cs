@@ -1,4 +1,5 @@
-﻿using BloodbowlLeague.Logic;
+﻿using AutoMapper;
+using BloodbowlLeague.Logic.Team;
 using LiteDB;
 
 namespace BloodbowlLeague.Data
@@ -17,8 +18,18 @@ namespace BloodbowlLeague.Data
             using ( var db = new LiteDatabase( _filePath ) )
             {
                 var col = db.GetCollection<TeamStorage>( "teams" );
+                var storageObj = Mapper.Map<TeamStorage>( toSave );
+                col.Insert( storageObj );
+            }
+        }
 
-                col.Insert( new TeamStorage { Name = toSave.Name } );
+        public Team Get( string teamName )
+        {
+            using ( var db = new LiteDatabase( _filePath ) )
+            {
+                var col = db.GetCollection<TeamStorage>( "teams" );
+                var storageObj = col.FindOne( t => t.Name == teamName );
+                return Mapper.Map<Team>( storageObj );
             }
         }
     }

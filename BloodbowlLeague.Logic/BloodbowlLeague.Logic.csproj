@@ -40,10 +40,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ITeamRepository.cs" />
+    <Compile Include="Team\IncorrectRaceException.cs" />
+    <Compile Include="Race\IRaceRepository.cs" />
+    <Compile Include="Team\ITeamRepository.cs" />
+    <Compile Include="Team\Player.cs" />
+    <Compile Include="Values\PlayerStats.cs" />
+    <Compile Include="Race\PlayerType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Team.cs" />
-    <Compile Include="TeamFactory.cs" />
+    <Compile Include="Race\Race.cs" />
+    <Compile Include="Race\RaceNotFoundException.cs" />
+    <Compile Include="Values\Skill.cs" />
+    <Compile Include="Team\Team.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
