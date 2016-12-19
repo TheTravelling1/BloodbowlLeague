@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.IO;
+using System.Linq;
 using AutoMapper;
 using BloodbowlLeague.Logic;
 using Ninject.Modules;
@@ -16,6 +18,14 @@ namespace BloodbowlLeague.Data
 
         public override void Load()
         {
+            var directory = Path.GetDirectoryName( _filePath );
+            if (directory == null) throw new ArgumentNullException(nameof(directory));
+            
+            if ( !Directory.Exists( directory ) )
+            {
+                Directory.CreateDirectory(directory);
+            }
+
             Mapper.Initialize( c => {
                 c.CreateMap<Team, TeamStorage>().ForMember( m => m.Id, m => m.Ignore() );
                 c.CreateMap<TeamStorage, Team>();

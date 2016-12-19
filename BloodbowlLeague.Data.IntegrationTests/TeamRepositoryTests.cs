@@ -12,7 +12,7 @@ namespace BloodbowlLeague.Data.IntegrationTests
     [TestFixture]
     public class TeamRepositoryTests
     {
-        private static readonly string TempFilePath = Path.Combine( Path.GetTempPath(), Guid.NewGuid() + ".tmp" );
+        private static readonly string TempFilePath = Path.Combine( Path.GetTempPath(), Guid.NewGuid().ToString(), Guid.NewGuid() + ".tmp" );
 
         private ITeamRepository _teamRepository;
         private readonly StandardKernel _container = new StandardKernel( new LiteDbModule( TempFilePath ) );
