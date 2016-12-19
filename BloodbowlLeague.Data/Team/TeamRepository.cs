@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using BloodbowlLeague.Logic.Team;
+using BloodbowlLeague.Logic;
 using LiteDB;
 
 namespace BloodbowlLeague.Data

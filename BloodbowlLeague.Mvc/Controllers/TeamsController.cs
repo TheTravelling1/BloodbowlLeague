@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
-using BloodbowlLeague.Logic.Race;
+using BloodbowlLeague.Logic;
 using BloodbowlLeague.Mvc.Models;
 
 namespace BloodbowlLeague.Mvc.Controllers

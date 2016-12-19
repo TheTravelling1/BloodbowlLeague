@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
-using BloodbowlLeague.Logic.Race;
+using BloodbowlLeague.Logic;
 using LiteDB;
 
 namespace BloodbowlLeague.Data
@@ -26,7 +27,12 @@ namespace BloodbowlLeague.Data
 
         public IReadOnlyCollection<Race> GetAll()
         {
-            throw new System.NotImplementedException();
+            using (var db = new LiteDatabase(_filePath))
+            {
+                var col = db.GetCollection<RaceStorage>( "races" );
+                var fromDb = col.FindAll();
+                return fromDb.Select(Mapper.Map<Race>).ToList();
+            }
         }
 
         public void Save( Race toSave )

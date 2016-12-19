@@ -1,6 +1,4 @@
-﻿using BloodbowlLeague.Logic.Team;
-
-namespace BloodbowlLeague.Data
+﻿namespace BloodbowlLeague.Data
 {
     public class TeamStorage
     {

@@ -1,0 +1,26 @@
+﻿@model BloodbowlLeague.Mvc.Models.NewSkillViewModel
+
+@{
+    ViewBag.Title = "New Skill";
+    Layout = "~/Views/Layouts/_Main.cshtml";
+}
+
+<h1>Skills</h1>
+<h2>Add a skill</h2>
+
+@using ( Html.BeginForm( "Add" ) )
+{
+    <p>
+        <label>Name</label>
+        @Html.EditorFor( m => m.Name )
+    </p>
+
+    <p>
+        <label>Description</label>
+        @Html.EditorFor( m => m.Description )
+    </p>
+
+    <p>
+        <input type="submit" value="Add Skill" />
+    </p>
+}

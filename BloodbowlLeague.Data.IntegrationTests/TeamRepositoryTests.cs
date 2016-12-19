@@ -1,9 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using BloodbowlLeague.Logic.Race;
-using BloodbowlLeague.Logic.Team;
-using BloodbowlLeague.Logic.Values;
+using BloodbowlLeague.Logic;
 using LiteDB;
 using Ninject;
 using NUnit.Framework;
@@ -14,7 +12,7 @@ namespace BloodbowlLeague.Data.IntegrationTests
     [TestFixture]
     public class TeamRepositoryTests
     {
-        private static readonly string TempFilePath = Path.Combine( Path.GetTempPath(), Guid.NewGuid() + ".tmp" );
+        private static readonly string TempFilePath = Path.Combine( Path.GetTempPath(), Guid.NewGuid().ToString(), Guid.NewGuid() + ".tmp" );
 
         private ITeamRepository _teamRepository;
         private readonly StandardKernel _container = new StandardKernel( new LiteDbModule( TempFilePath ) );

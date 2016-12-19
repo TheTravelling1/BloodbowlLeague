@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace BloodbowlLeague.Logic.Team
+namespace BloodbowlLeague.Logic
 {
     [Serializable]
     public class IncorrectRaceException : Exception

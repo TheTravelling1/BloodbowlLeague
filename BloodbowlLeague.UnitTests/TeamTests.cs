@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using BloodbowlLeague.Logic;
-using BloodbowlLeague.Logic.Team;
 using NUnit.Framework;
 using Shouldly;
 
