@@ -1,4 +1,4 @@
-﻿@model dynamic
+﻿@model BloodbowlLeague.Mvc.Models.NewTeamViewModel
 
 @{
     ViewBag.Title = "title";
@@ -6,3 +6,9 @@
 }
 
 <h1>New Team</h1>
+
+<label>Name</label>
+@Html.EditorFor( m => m.Name )
+
+<label>Race</label>
+@Html.DropDownListFor( m => m.Race, Model.AvailableRaces.Select( r => new SelectListItem { Text = r, Value = r } ) )

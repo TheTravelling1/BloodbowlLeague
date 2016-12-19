@@ -1,7 +1,13 @@
-﻿namespace BloodbowlLeague.Logic.Race
+﻿using System.Collections.Generic;
+
+namespace BloodbowlLeague.Logic.Race
 {
     public interface IRaceRepository
     {
-        Race GetRace( string name );
+        Race Get( string name );
+
+        IReadOnlyCollection<Race> GetAll();
+
+        void Save(Race toSave);
     }
 }

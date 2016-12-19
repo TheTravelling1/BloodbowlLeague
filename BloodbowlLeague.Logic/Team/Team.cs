@@ -29,7 +29,7 @@ namespace BloodbowlLeague.Logic.Team
 
         public void AddPlayer( PlayerType type, string name )
         {
-            if ( type.Race.Name != Race )
+            if ( type.Race != Race )
             {
                 throw new IncorrectRaceException();
             }

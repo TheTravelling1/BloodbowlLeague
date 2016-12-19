@@ -13,7 +13,7 @@ namespace BloodbowlLeague.Data
             _filePath = filePath;
         }
 
-        public void SaveTeam( Team toSave )
+        public void Save( Team toSave )
         {
             using ( var db = new LiteDatabase( _filePath ) )
             {

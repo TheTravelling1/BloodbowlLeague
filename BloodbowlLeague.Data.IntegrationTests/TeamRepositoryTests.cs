@@ -44,10 +44,10 @@ namespace BloodbowlLeague.Data.IntegrationTests
         public void When_saving_a_team__Then_it_should_be_persisted()
         {
             var toSave = new Team( "High and Mighty", "High Elf" );
-            var playerType = new PlayerType( "Blitzer", new Race( "High Elf" ), new PlayerStats( 1, 2, 3, 4 ), new[] { new Skill( "Block", "Blocks" ) } );
+            var playerType = new PlayerType( "Blitzer", "High Elf", new PlayerStats( 1, 2, 3, 4 ), new[] { "Block" } );
             toSave.AddPlayer( playerType, "Mikul Maviv" );
 
-            _teamRepository.SaveTeam( toSave );
+            _teamRepository.Save( toSave );
 
             TeamStorage fromDb;
             using ( var db = new LiteDatabase( TempFilePath ) )
@@ -88,23 +88,13 @@ namespace BloodbowlLeague.Data.IntegrationTests
                 player.BaseStats.Strength.ShouldBe( playerToCheck.BaseStats.Strength );
                 player.BaseStats.Agility.ShouldBe( playerToCheck.BaseStats.Agility );
                 player.BaseStats.ArmourValue.ShouldBe( playerToCheck.BaseStats.ArmourValue );
-
-                player.BaseSkills.Length.ShouldBe( playerToCheck.BaseSkills.Count );
-                foreach ( var baseSkill in playerToCheck.BaseSkills )
-                {
-                    player.BaseSkills.ShouldContain( s => s.Name == baseSkill.Name && s.Description == baseSkill.Description );
-                }
+                player.BaseSkills.ShouldBe( playerToCheck.BaseSkills );
 
                 player.Stats.MovementAllowance.ShouldBe( playerToCheck.Stats.MovementAllowance );
                 player.Stats.Strength.ShouldBe( playerToCheck.Stats.Strength );
                 player.Stats.Agility.ShouldBe( playerToCheck.Stats.Agility );
                 player.Stats.ArmourValue.ShouldBe( playerToCheck.Stats.ArmourValue );
-
-                player.Skills.Length.ShouldBe( playerToCheck.Skills.Count );
-                foreach ( var skill in playerToCheck.Skills )
-                {
-                    player.Skills.ShouldContain( s => s.Name == skill.Name && s.Description == skill.Description );
-                }
+                player.Skills.ShouldBe( playerToCheck.Skills );
             }
         }
 
@@ -124,13 +114,13 @@ namespace BloodbowlLeague.Data.IntegrationTests
                 player.BaseStats.Strength.ShouldBe( playerToCheck.BaseStats.Strength );
                 player.BaseStats.Agility.ShouldBe( playerToCheck.BaseStats.Agility );
                 player.BaseStats.ArmourValue.ShouldBe( playerToCheck.BaseStats.ArmourValue );
-                player.BaseSkills.ShouldBe( playerToCheck.BaseSkills.Select( s => new Skill( s.Name, s.Description ) ) );
+                player.BaseSkills.ShouldBe( playerToCheck.BaseSkills );
 
                 player.Stats.MovementAllowance.ShouldBe( playerToCheck.Stats.MovementAllowance );
                 player.Stats.Strength.ShouldBe( playerToCheck.Stats.Strength );
                 player.Stats.Agility.ShouldBe( playerToCheck.Stats.Agility );
                 player.Stats.ArmourValue.ShouldBe( playerToCheck.Stats.ArmourValue );
-                player.Skills.ShouldBe( playerToCheck.Skills.Select( s => new Skill( s.Name, s.Description ) ) );
+                player.Skills.ShouldBe( playerToCheck.Skills );
             }
         }
 
@@ -155,17 +145,12 @@ namespace BloodbowlLeague.Data.IntegrationTests
                     {
                         Name = "Mikul Maviv",
                         Type = "Blitzer",
-                        BaseStats = new StatStorage {MovementAllowance = 1, Strength = 2, Agility = 3, ArmourValue = 4},
-                        BaseSkills = new[] {new SkillStorage {Name = "Block", Description = "Blocks"}},
-                        Stats = new StatStorage {MovementAllowance = 9, Strength = 8, Agility = 7, ArmourValue = 6},
-                        Skills =
-                            new[]
-                            {
-                                new SkillStorage {Name = "Block", Description = "Blocks"},
-                                new SkillStorage {Name = "Safe Throw", Description = "Throws"}
-                            }
+                        BaseStats = new PlayerStatStorage {MovementAllowance = 1, Strength = 2, Agility = 3, ArmourValue = 4},
+                        BaseSkills = new[] { "Block" },
+                        Stats = new PlayerStatStorage {MovementAllowance = 9, Strength = 8, Agility = 7, ArmourValue = 6},
+                        Skills = new[] { "Block", "Safe Throw" }
                     }
-                }
+            }
             };
         }
     }
