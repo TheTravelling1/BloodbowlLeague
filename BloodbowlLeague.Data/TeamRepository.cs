@@ -1,4 +1,6 @@
-﻿using BloodbowlLeague.Logic;
+﻿using AutoMapper;
+using BloodbowlLeague.Logic;
+using BloodbowlLeague.Logic.Team;
 using LiteDB;
 
 namespace BloodbowlLeague.Data
@@ -18,7 +20,8 @@ namespace BloodbowlLeague.Data
             {
                 var col = db.GetCollection<TeamStorage>( "teams" );
 
-                col.Insert( new TeamStorage { Name = toSave.Name } );
+                var storageObject = Mapper.Map<TeamStorage>( toSave );
+                col.Insert( storageObject );
             }
         }
     }

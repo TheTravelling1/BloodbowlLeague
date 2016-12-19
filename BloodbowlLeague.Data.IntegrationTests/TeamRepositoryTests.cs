@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using BloodbowlLeague.Logic;
+using BloodbowlLeague.Logic.Team;
 using LiteDB;
 using Ninject;
 using NUnit.Framework;
@@ -40,7 +41,7 @@ namespace BloodbowlLeague.Data.IntegrationTests
         [Test]
         public void When_saving_a_team_Then_its_name_should_be_persisted()
         {
-            var toSave = new Team( "High and Mighty" );
+            var toSave = new Team( "High and Mighty", "High Elf" );
 
             _teamRepository.SaveTeam( toSave );
 

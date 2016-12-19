@@ -1,4 +1,6 @@
-﻿using BloodbowlLeague.Logic;
+﻿using AutoMapper;
+using BloodbowlLeague.Logic;
+using BloodbowlLeague.Logic.Team;
 using Ninject.Modules;
 
 namespace BloodbowlLeague.Data
@@ -14,6 +16,12 @@ namespace BloodbowlLeague.Data
 
         public override void Load()
         {
+            Mapper.Initialize(c =>
+            {
+                c.CreateMap<Team, TeamStorage>();
+                c.CreateMap<TeamStorage, Team>();
+            });
+
             Bind<ITeamRepository>()
                 .ToConstant(new TeamRepository(_filePath))
                 .InSingletonScope();
