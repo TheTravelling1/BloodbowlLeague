@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodbowlLeague.UnitTests",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodbowlLeague.Data", "BloodbowlLeague.Data\BloodbowlLeague.Data.csproj", "{1C1659A7-7EF5-44EA-A803-B4D439A7BBF2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodbowlLeague.Data.IntegrationTests", "BloodbowlLeague.Data.IntegrationTests\BloodbowlLeague.Data.IntegrationTests.csproj", "{4CFFADD5-C44B-4B3D-A1EF-432B2E62FBA5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{1C1659A7-7EF5-44EA-A803-B4D439A7BBF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C1659A7-7EF5-44EA-A803-B4D439A7BBF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C1659A7-7EF5-44EA-A803-B4D439A7BBF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CFFADD5-C44B-4B3D-A1EF-432B2E62FBA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CFFADD5-C44B-4B3D-A1EF-432B2E62FBA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CFFADD5-C44B-4B3D-A1EF-432B2E62FBA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CFFADD5-C44B-4B3D-A1EF-432B2E62FBA5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
