@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="SkillRepositoryTests.cs" />
     <Compile Include="RaceRepositoryTests.cs" />
+    <Compile Include="CoachRepositoryTests.cs" />
     <Compile Include="TeamRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

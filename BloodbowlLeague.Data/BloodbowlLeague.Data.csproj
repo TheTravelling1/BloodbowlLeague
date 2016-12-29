@@ -52,6 +52,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Coach\CoachRepository.cs" />
+    <Compile Include="Coach\CoachStorage.cs" />
     <Compile Include="LiteDbModule.cs" />
     <Compile Include="Team\PlayerStorage.cs" />
     <Compile Include="Race\PlayerTypeStorage.cs" />
@@ -73,6 +75,7 @@
       <Name>BloodbowlLeague.Logic</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

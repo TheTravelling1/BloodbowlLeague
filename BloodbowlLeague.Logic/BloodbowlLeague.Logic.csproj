@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Coach\Coach.cs" />
+    <Compile Include="Coach\ITeamRepository.cs" />
     <Compile Include="Skill\ISkillRepository.cs" />
     <Compile Include="Team\IncorrectRaceException.cs" />
     <Compile Include="Race\IRaceRepository.cs" />

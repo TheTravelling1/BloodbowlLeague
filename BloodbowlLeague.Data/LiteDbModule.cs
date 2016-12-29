@@ -41,6 +41,9 @@ namespace BloodbowlLeague.Data
 
                 c.CreateMap<Race, RaceStorage>().ForMember( m => m.Id, m => m.Ignore() );
                 c.CreateMap<RaceStorage, Race>();
+
+                c.CreateMap<Coach, CoachStorage>().ForMember( m => m.Id, m => m.Ignore() );
+                c.CreateMap<CoachStorage, Coach>();
             } );
 
             Mapper.AssertConfigurationIsValid();
@@ -55,6 +58,10 @@ namespace BloodbowlLeague.Data
 
             Bind<ISkillRepository>()
                 .ToConstant( new SkillRepository( _filePath ) )
+                .InSingletonScope();
+
+            Bind<ICoachRepository>()
+                .ToConstant( new CoachRepository( _filePath ) )
                 .InSingletonScope();
         }
     }
